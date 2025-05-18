@@ -15,3 +15,8 @@ run:
 ```
 alr run
 ```
+
+giving parameter to the execution
+```
+alr run --args="will Ada print these words?"
+```
