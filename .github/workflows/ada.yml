@@ -15,10 +15,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Set up GNAT toolchain
-      run: >
-        sudo apt-get update &&
-        sudo apt-get install gnat gprbuild
+    - name: Install Alire
+      run: |
+        curl -fsSL https://alire.ada.dev/install.sh | sh -s -- -y
+        echo "$HOME/.alire/bin" >> $GITHUB_PATH
 
-    - name: Build
-      run: gprbuild -j0 -p
+    - name: Install toolchain
+      run: alr toolchain --select
+
+    - name: Build with Alire
+      run: alr build
