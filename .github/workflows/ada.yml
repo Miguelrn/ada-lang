@@ -19,6 +19,7 @@ jobs:
       run: |
         curl -fsSL https://alire.ada.dev/install.sh | sh -s -- -y
         echo "$HOME/.alire/bin" >> $GITHUB_PATH
+        export PATH="$HOME/.alire/bin:$PATH"
 
     - name: Install toolchain
       run: alr toolchain --select
