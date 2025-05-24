@@ -8,21 +8,16 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Install Alire
+    - name: Install GNAT and gprbuild
       run: |
-        curl -fsSL https://alire.ada.dev/install.sh | sh -s -- -y
-        echo "$HOME/.alire/bin" >> $GITHUB_PATH
-        export PATH="$HOME/.alire/bin:$PATH"
+        sudo apt-get update
+        sudo apt-get install -y gnat gprbuild
 
-    - name: Install toolchain
-      run: alr toolchain --select
-
-    - name: Build with Alire
-      run: alr build
+    - name: Build with gprbuild
+      run: gprbuild my_hello_world.gpr
